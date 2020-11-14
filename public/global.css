@@ -1,0 +1,16 @@
+
+@import "./vendor/fretboard.css";
+
+:root {
+	--primary: #12658b;
+  }
+
+body {
+	background-color: rgb(184, 184, 184);
+	font-size: 20px;
+}
+
+
+
+
+
