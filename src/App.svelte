@@ -20,7 +20,7 @@
 	h1 {
 		color: var(--primary);
 		text-transform: uppercase;
-		font-size: 4em;
+		font-size: 2em;
 		font-weight: 100;
 	}
 

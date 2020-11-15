@@ -1,11 +1,12 @@
 <script>
     import jQuery from 'jquery';
     import { onMount } from 'svelte';
-    import { blur } from 'svelte/transition';
+    import { blur, fade, fly } from 'svelte/transition';
     import Fretboard from "./Fretboard.svelte";
 
     let options;
     let randomString;
+    // TODO use object so {note:"A"} != {note:"A"} 
     let randomNote;
     let showSuccess = false;
 
@@ -142,7 +143,9 @@
 
 <main>
     <div>Select note on the highlighted string:</div>
-    <span class="randomNote">{randomNote}</span>
+    {#key randomNote}
+        <div class="randomNote" in:fly={{x: 400}}>{randomNote}</div>
+    {/key}
     <Fretboard options={options} on:fretboardInitialized={afterFretboardInit}/>
     {#if showSuccess}
         <div out:blur="{{amount: 10}}" id="success">
