@@ -6,8 +6,8 @@
 
     let options;
     let randomString;
-    // TODO use object so {note:"A"} != {note:"A"} 
-    let randomNote;
+    // using object because {note:"A"} != {note:"A"} - for transitions
+    let randomNote = {};
     let showSuccess = false;
 
     let allNoteLetters = ["C", "C#/Db", "D", "D#/Eb", "E", "F", "F#/Gb", "G", "Ab/G#", "A", "A#/Bb", "B"];
@@ -69,7 +69,7 @@
             console.log(clickedNoteLetters);
 
             var clickedString = clickedNotes[0].string;
-            if (clickedNoteLetters[0] === randomNote && randomString === getStringNumber(clickedString)) {
+            if (clickedNoteLetters[0] === randomNote.note && randomString === getStringNumber(clickedString)) {
                 showSuccess = true;
                 afterFretboardInit();
 
@@ -117,7 +117,7 @@
     }
 
     let pickRandomNote = () => {
-        randomNote = noteLettersToPickFrom[Math.floor(Math.random() * noteLettersToPickFrom.length)];
+        randomNote.note = noteLettersToPickFrom[Math.floor(Math.random() * noteLettersToPickFrom.length)];
     }
    
 
@@ -144,7 +144,7 @@
 <main>
     <div>Select note on the highlighted string:</div>
     {#key randomNote}
-        <div class="randomNote" in:fly={{x: 400}}>{randomNote}</div>
+        <div class="randomNote" in:fly={{x: 400}}>{randomNote.note}</div>
     {/key}
     <Fretboard options={options} on:fretboardInitialized={afterFretboardInit}/>
     {#if showSuccess}
