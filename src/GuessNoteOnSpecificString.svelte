@@ -66,7 +66,6 @@
             var clickedNoteLetters = clickedNotes.map(function (e) {
                 return e.notes[0].letter;
             });
-            console.log(clickedNoteLetters);
 
             var clickedString = clickedNotes[0].string;
             if (clickedNoteLetters[0] === randomNote.note && randomString === getStringNumber(clickedString)) {
