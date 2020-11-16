@@ -9,6 +9,8 @@
     // using object because {note:"A"} != {note:"A"} - for transitions
     let randomNote = {};
     let showSuccess = false;
+    let successCounter = 0;
+    let failureCounter = 0;
 
     let allNoteLetters = ["C", "C#/Db", "D", "D#/Eb", "E", "F", "F#/Gb", "G", "Ab/G#", "A", "A#/Bb", "B"];
     let noteLettersToPickFrom = ["C", "D", "E", "F", "G", "A", "B"];
@@ -70,6 +72,7 @@
             var clickedString = clickedNotes[0].string;
             if (clickedNoteLetters[0] === randomNote.note && randomString === getStringNumber(clickedString)) {
                 showSuccess = true;
+                successCounter++;
                 afterFretboardInit();
 
                 setTimeout(function () {
@@ -78,6 +81,7 @@
                 }, 1000);
 
             } else {
+                failureCounter++;
                 setTimeout(function () {
                     api.clearClickedNotes();
                 }, 400);
@@ -137,7 +141,6 @@
             return 5;
         }
     }
-
 </script>
 
 <main>
@@ -146,11 +149,17 @@
         <div class="randomNote" in:fly={{x: 400}}>{randomNote.note}</div>
     {/key}
     <Fretboard options={options} on:fretboardInitialized={afterFretboardInit}/>
-    {#if showSuccess}
+    <!-- {#if showSuccess}
         <div out:blur="{{amount: 10}}" id="success">
             CORRECT!
         </div>
-    {/if}
+    {:else}
+        <div>&nbsp;</div>
+    {/if} -->
+    <div style="visibility: {showSuccess ? 'visible' : 'hidden'}" id="success">
+        CORRECT!
+    </div>
+    <div>{successCounter} / {failureCounter}</div>
 </main>
 
 <style>
