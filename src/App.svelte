@@ -1,11 +1,15 @@
 
 <script>
+	import Footer from "./Footer.svelte";
 	import GuessNoteOnSpecificString from "./GuessNoteOnSpecificString.svelte";
+	import Menu from "./Menu.svelte";
 </script>
 
 <main>
 	<h1 id="heading">MY FRETBOARD TRAINER</h1>
+	<!-- <Menu/> -->
 	<GuessNoteOnSpecificString/>
+	<Footer/>
 </main>
 
 <style>
