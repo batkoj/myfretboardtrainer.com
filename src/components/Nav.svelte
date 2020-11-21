@@ -2,7 +2,7 @@
 	import { onMount } from "svelte";
 
 	onMount(async () => {
-		jQuery('.sub-menu').on('click', function(e) {
+		jQuery('.menu-item > a').on('click', function(e) {
 			jQuery('.sub-menu').css('display', 'none');
 		});
 		jQuery('.menu-item').hover(function() {
@@ -12,6 +12,7 @@
 </script>
 
 <nav class="menu">
+	<!-- <div class="logo">asdasd</div> -->
 	<ol>
 		<li class="menu-item"><a href="/home">Home</a></li>
 		<li class="menu-item">
@@ -32,9 +33,18 @@
 
 	:root {
 		--dark: #171616;
+		--light:  #fff;
 		--onhover: #698a8f;
 	}
+
+	/* .logo {
+		color: var(--light);
+	} */
+
 	.menu {
+		/* display: flex; */
+		/* justify-content: space-evenly; */
+
 		background: var(--dark);
 		height: 4rem;
 
@@ -81,7 +91,7 @@
 		white-space: nowrap;
 		text-overflow: ellipsis;
 		display: block;
-		color: #fff;
+		color: var(--light);
 	}
 	.sub-menu .menu-item {
 		padding: 0.75rem 0;
@@ -108,7 +118,7 @@
 	.sub-menu .menu-item a {
 		padding: 0 0.75rem;
 	}
-	@media screen and (max-width: 600px) {
+	/* @media screen and (max-width: 600px) {
 		.sub-menu .menu-item {
 			background: #c06c84;
 		}
@@ -116,6 +126,7 @@
 	@media screen and (max-width: 600px) {
 		.menu {
 			position: relative;
+			z-index: 999999;
 		}
 		.menu:after {
 			content: "";
@@ -172,7 +183,7 @@
 		.menu:hover:after {
 			box-shadow: none;
 		}
-	}
+	} */
 
 	.sub-menu {
 		position: absolute;
@@ -185,14 +196,14 @@
 	.menu-item:hover > .sub-menu {
 		display: block;
 	}
-	@media screen and (max-width: 600px) {
+	/* @media screen and (max-width: 600px) {
 		.sub-menu {
 			width: 100vw;
 			left: -2rem;
 			top: 50%;
 			transform: translateY(-50%);
 		}
-	}
+	} */
 
 	* {
 		box-sizing: border-box;
