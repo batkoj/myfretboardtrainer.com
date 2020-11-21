@@ -12,7 +12,7 @@
     onMount(async () => {
         // $: {
             console.log('OPTIONS:', options)
-            console.log(jQuery);
+            // console.log(jQuery);
 
             var fretboard = jQuery(".my-fretboard-js");
             fretboard.fretboard(options);

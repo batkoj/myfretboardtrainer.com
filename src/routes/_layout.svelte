@@ -2,7 +2,9 @@
 	import Nav from '../components/Nav.svelte';
 	import Footer from '../components/Footer.svelte';
 
-	// export let segment: string;
+	// hack to get rid of the console warning
+	export let segment: any;
+	segment = !segment;
 </script>
 
 <style>
