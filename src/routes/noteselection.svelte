@@ -1,13 +1,15 @@
 <script>
-    import jQuery from 'jquery';
+    // import jQuery from 'jQuery';
     import { onMount } from 'svelte';
     import { blur, fade, fly } from 'svelte/transition';
-    import Fretboard from "./Fretboard.svelte";
+	import Fretboard from '../components/Fretboard.svelte';
+
+    
 
     let options;
     let randomString;
     // using object because {note:"A"} != {note:"A"} - for transitions
-    let randomNote = {};
+    let randomNote = {note:""};
     let showSuccess = false;
     let successCounter = 0;
     let failureCounter = 0;
@@ -16,6 +18,8 @@
     let noteLettersToPickFrom = ["C", "D", "E", "F", "G", "A", "B"];
 
 	onMount(async () => {
+        // const jQuery = window.$;
+
         var isChordMode = true;
         var isDisabled = false;
         
@@ -69,24 +73,26 @@
                 return e.notes[0].letter;
             });
 
-            var clickedString = clickedNotes[0].string;
-            if (clickedNoteLetters[0] === randomNote.note && randomString === getStringNumber(clickedString)) {
-                showSuccess = true;
-                successCounter++;
-                afterFretboardInit();
+            let first = clickedNotes[0];
+            if (first != null) {
+                var clickedString = first.string;
+                if (clickedNoteLetters[0] === randomNote.note && randomString === getStringNumber(clickedString)) {
+                    showSuccess = true;
+                    successCounter++;
+                    afterFretboardInit();
 
-                setTimeout(function () {
-                    api.clearClickedNotes();
-                    showSuccess = false;
-                }, 1000);
+                    setTimeout(function () {
+                        api.clearClickedNotes();
+                        showSuccess = false;
+                    }, 1000);
 
-            } else {
-                failureCounter++;
-                setTimeout(function () {
-                    api.clearClickedNotes();
-                }, 400);
+                } else {
+                    failureCounter++;
+                    setTimeout(function () {
+                        api.clearClickedNotes();
+                    }, 400);
+                }
             }
-
         }
 
         options = {
@@ -144,11 +150,17 @@
 </script>
 
 <main>
+    <h1>Note selection</h1>
     <div>Select note on the highlighted string:</div>
     {#key randomNote}
         <div class="randomNote" in:fly={{x: 400}}>{randomNote.note}</div>
     {/key}
-    <Fretboard options={options} on:fretboardInitialized={afterFretboardInit}/>
+    <!-- <Fretboard options={options} on:fretboardInitialized={afterFretboardInit}/> -->
+    {#if options != undefined}
+        <Fretboard options={options} on:fretboardInitialized={afterFretboardInit}/>
+    {/if}
+
+
     <!-- {#if showSuccess}
         <div out:blur="{{amount: 10}}" id="success">
             CORRECT!
@@ -169,7 +181,7 @@
     }
 
     #success {
-        background-color: #57c057;
+        background-color: #79c779;
         color: white; 
         text-align: center;
     }
