@@ -1,8 +1,21 @@
+<script>
+	import { onMount } from "svelte";
+
+	onMount(async () => {
+		jQuery('.sub-menu').on('click', function(e) {
+			jQuery('.sub-menu').css('display', 'none');
+		});
+		jQuery('.menu-item').hover(function() {
+			jQuery('.sub-menu').css('display', '');
+		});
+	});	
+</script>
+
 <nav class="menu">
 	<ol>
 		<li class="menu-item"><a href="/home">Home</a></li>
 		<li class="menu-item">
-			<a href="#0">Exercises</a>
+			<a href="/noteselection">Exercises</a>
 			<ol class="sub-menu">
 				<li class="menu-item"><a href="/noteselection">Note selection</a></li>
 				<li class="menu-item"><a href="/noteidentification">Note identification</a></li>
