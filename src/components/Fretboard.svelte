@@ -7,21 +7,18 @@
 
     const dispatch = createEventDispatcher()
 
-    console.log('Fretboard asd asd asda sda sd ');
-
     onMount(async () => {
-        // $: {
-            console.log('OPTIONS:', options)
-            // console.log(jQuery);
+    // $: {
+        console.log('OPTIONS:', options)
 
-            var fretboard = jQuery(".my-fretboard-js");
-            fretboard.fretboard(options);
-            dispatch("fretboardInitialized");
-        // }
+        var fretboard = jQuery(".my-fretboard-js");
+        fretboard.fretboard(options);
+        dispatch("fretboardInitialized");
+    // }
     });
 
 </script>
 
 <main>
-    <div in:fade="{{duration: 800}}" class="my-fretboard-js dark-theme"></div>
+    <div in:fade="{{duration: 600}}" class="my-fretboard-js dark-theme"></div>
 </main>

@@ -1,10 +1,8 @@
 <script>
-    // import jQuery from 'jQuery';
     import { onMount } from 'svelte';
-    import { blur, fade, fly } from 'svelte/transition';
+    import { fly, fade } from 'svelte/transition';
 	import Fretboard from '../components/Fretboard.svelte';
 
-    
 
     let options;
     let randomString;
@@ -18,8 +16,6 @@
     let noteLettersToPickFrom = ["C", "D", "E", "F", "G", "A", "B"];
 
 	onMount(async () => {
-        // const jQuery = window.$;
-
         var isChordMode = true;
         var isDisabled = false;
         
@@ -147,31 +143,25 @@
             return 5;
         }
     }
+
+    $: successPercentage = (successCounter + failureCounter != 0) ? Math.floor(successCounter * 100 / (successCounter + failureCounter)) : 0;
 </script>
 
 <main>
     <h1>Note selection</h1>
     <div>Select note on the highlighted string:</div>
     {#key randomNote}
-        <div class="randomNote" in:fly={{x: 400}}>{randomNote.note}</div>
+        <div class="randomNote" in:fade="{{duration: 600}}">{randomNote.note}</div>
     {/key}
-    <!-- <Fretboard options={options} on:fretboardInitialized={afterFretboardInit}/> -->
     {#if options != undefined}
         <Fretboard options={options} on:fretboardInitialized={afterFretboardInit}/>
     {/if}
 
 
-    <!-- {#if showSuccess}
-        <div out:blur="{{amount: 10}}" id="success">
-            CORRECT!
-        </div>
-    {:else}
-        <div>&nbsp;</div>
-    {/if} -->
     <div style="visibility: {showSuccess ? 'visible' : 'hidden'}" id="success">
         CORRECT!
     </div>
-    <div>{successCounter} / {failureCounter}</div>
+    <span>{successCounter} / {failureCounter} ({successPercentage}%)</span>
 </main>
 
 <style>
