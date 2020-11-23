@@ -14,23 +14,29 @@
 		/* max-width: 1800px; */
 		/* margin: 0 auto; */
 	}
-	/* main {
-		position: relative;
-		max-width: 56em;
-		background-color: white;
-		padding: 2em;
-		margin: 0 auto;
-		box-sizing: border-box;
-	} */
+
+	.content {
+		flex: 1 0 auto; /* Prevent Chrome, Opera, and Safari from letting these items shrink to smaller than their content's default minimum size. 
+						   This is the shorthand for flex-grow, flex-shrink and flex-basis combined. The second and third parameters (flex-shrink and flex-basis) are optional. 
+						   The default is 0 1 auto*/
+	}
+
+	.footer {
+		flex-shrink: 0; /* Prevent Chrome, Opera, and Safari from letting these items shrink to smaller than their content's default minimum size. 
+						   This defines the ability for a flex item to shrink if necessary.*/
+		padding: 20px;
+	}
 </style>
 
 
-<!-- <h1>My Fretboard Trainer</h1> -->
-<!-- <Nav {segment}/> -->
-<Nav />
+<div class="content">
+	<!-- <Nav {segment}/> -->
+	<Nav />
+	<main>
+		<slot></slot>
+	</main>
+</div>	
 
-<main>
-	<slot></slot>
-</main>
-
-<Footer/>
+<div class="footer">
+	<Footer />
+</div>
