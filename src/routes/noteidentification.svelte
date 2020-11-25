@@ -3,32 +3,24 @@
     import { fly, fade } from 'svelte/transition';
 	import Fretboard from '../components/Fretboard.svelte';
 
-	let standardTuning = [{letter: "E", octave: 4}, {letter: "B", octave: 3}, {letter: "G", octave: 3}, {letter: "D", octave: 3}, {letter: "A", octave: 2}, {letter: "E", octave: 2}];
-
-    let options;
-	
-	let randomFret = Math.floor(Math.random() * 11);
-	let randomString = standardTuning[Math.floor(Math.random() * standardTuning.length)];
-	let randomNote = [{
-		string: randomString, 
-		notes: [{fret: randomFret}]
-	}];
-
+	let options;
+	let randomNoteLetter;
     let showSuccess = false;
     let successCounter = 0;
     let failureCounter = 0;
-
+	
+	let standardTuning = [{letter: "E", octave: 4}, {letter: "B", octave: 3}, {letter: "G", octave: 3}, {letter: "D", octave: 3}, {letter: "A", octave: 2}, {letter: "E", octave: 2}];
     let allNoteLetters = ["C", "C#/Db", "D", "D#/Eb", "E", "F", "F#/Gb", "G", "Ab/G#", "A", "A#/Bb", "B"];
     let wholeNoteLetters = ["C", "D", "E", "F", "G", "A", "B"];
 
 	onMount(async () => {
-        var isChordMode = true;
-        var isDisabled = true;
+        let isChordMode = true;
+        let isDisabled = true;
         
-        var numFrets = 12;
-        var dimensionsFunc = function ($fretboardContainer, $fretboardBody, settings) {
-            var width = jQuery(window).width();
-            var height;
+        let numFrets = 12;
+        let dimensionsFunc = function ($fretboardContainer, $fretboardBody, settings) {
+            let width = jQuery(window).width();
+            let height;
 
             if (width <= 768) {
                 height = settings.tuning.length * 26;
@@ -40,12 +32,12 @@
                 height: height
             };
         };
-        var noteCircles = [3, 5, 7, 9, 12, 15, 17, 19, 21, 24];
-        var intervals = ["1", "b2", "2", "b3", "3", "4", "b5", "5", "b6", "6", "b7", "7"];
-        var root = "C";
-        var animationSpeed = 400; // ms
-        var noteMode = "letter"; // or "interval"
-		var clickedNotesChangedFunc = () => {};
+        let noteCircles = [3, 5, 7, 9, 12, 15, 17, 19, 21, 24];
+        let intervals = ["1", "b2", "2", "b3", "3", "4", "b5", "5", "b6", "6", "b7", "7"];
+        let root = "C";
+        let animationSpeed = 400; // ms
+        let noteMode = "letter"; // or "interval"
+		let clickedNotesChangedFunc = () => {};
 
         options = {
             tuning: standardTuning,
@@ -65,13 +57,49 @@
 	});
 	
 	
-    const afterFretboardInit = () => {
-		let $fretboard = jQuery(".my-fretboard-js");
+    function afterFretboardInit() {
+		pickRandomNote();
+	}
+	
+	function pickRandomNote() {
+        let $fretboard = jQuery(".my-fretboard-js");
 		let api = $fretboard.data("api");
-        api.clearClickedNotes();
+		api.clearClickedNotes();
+		
+		let randomNote = pickNoteUntilWhole(api);
+
 		api.setClickedNotes(randomNote);
 		document.querySelectorAll(".note-display").forEach(x => x.style.visibility = "hidden");
-    }
+	}
+
+	function pickNoteUntilWhole(api) {
+		let randomString = standardTuning[Math.floor(Math.random() * standardTuning.length)];
+		let randomFret = Math.floor(Math.random() * 11);
+		let randomNote = [{
+			string: randomString, 
+			notes: [{fret: randomFret}]
+		}];
+
+		randomNoteLetter = api.getNoteByFretNumber(randomString, randomFret).letter;
+		console.log(randomNoteLetter);
+		if (!wholeNoteLetters.some( x => x === randomNoteLetter)) {
+			 return pickNoteUntilWhole(api)
+		}
+		return randomNote;
+	}
+	
+	function handleClick(note) {
+		if (note.note === randomNoteLetter) {
+			showSuccess = true;
+			successCounter++;
+			pickRandomNote();
+			setTimeout(function () {
+				showSuccess = false;
+			}, 1000);
+		} else {
+			failureCounter++;
+		}
+	}
 
 
     $: successPercentage = (successCounter + failureCounter != 0) ? Math.floor(successCounter * 100 / (successCounter + failureCounter)) : 0;
@@ -87,12 +115,16 @@
 		<Fretboard options={options} on:fretboardInitialized={afterFretboardInit}/>
     {/if}
 	
-    <div>Select:</div>
-
     <div style="visibility: {showSuccess ? 'visible' : 'hidden'}" id="success">
         CORRECT!
     </div>
-    <span>{successCounter} / {failureCounter} ({successPercentage}%)</span>
+	<span>{successCounter} / {failureCounter} ({successPercentage}%)</span>
+	
+	<div class="buttons">
+		{#each wholeNoteLetters as note}
+			<button class="button" on:click={() => handleClick({note})}>{note}</button>
+		{/each}
+	</div>
 </main>
 
 <style>
@@ -100,5 +132,17 @@
         background-color: #79c779;
         color: white; 
         text-align: center;
-    }
+	}
+
+	.buttons {
+		display: flex;
+		justify-content: center;
+		margin-top: 20px;
+	}
+
+	@media screen and (min-width: 1400px) {
+		.buttons {
+			padding: 0px 400px;
+		}
+	}
 </style>

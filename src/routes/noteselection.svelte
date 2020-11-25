@@ -92,9 +92,8 @@
 
     });
     
-
     
-    const afterFretboardInit = () => {
+    let afterFretboardInit = () => {
         highlightRandomString();
         pickRandomNote();
     }
@@ -112,7 +111,6 @@
         randomNote.note = noteLettersToPickFrom[Math.floor(Math.random() * noteLettersToPickFrom.length)];
     }
    
-
     let getStringNumber = (string) => {
         if (string.letter === 'E') {
             if (string.octave === 2) {
