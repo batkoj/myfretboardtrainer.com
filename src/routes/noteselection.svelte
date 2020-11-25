@@ -16,32 +16,15 @@
     let noteLettersToPickFrom = ["C", "D", "E", "F", "G", "A", "B"];
 
 	onMount(async () => {
-        var isChordMode = true;
-        var isDisabled = false;
+        let isChordMode = true;
+        let isDisabled = false;
         
-        var standardTuning = [{
-            letter: "E",
-            octave: 4
-        }, {
-            letter: "B",
-            octave: 3
-        }, {
-            letter: "G",
-            octave: 3
-        }, {
-            letter: "D",
-            octave: 3
-        }, {
-            letter: "A",
-            octave: 2
-        }, {
-            letter: "E",
-            octave: 2
-        }];
-        var numFrets = 12;
-        var dimensionsFunc = function ($fretboardContainer, $fretboardBody, settings) {
-            var width = jQuery(window).width();
-            var height;
+        let standardTuning = [{letter: "E", octave: 4}, {letter: "B", octave: 3}, {letter: "G", octave: 3}, {letter: "D", octave: 3}, {letter: "A", octave: 2}, {letter: "E", octave: 2}];
+
+        let numFrets = 12;
+        let dimensionsFunc = function ($fretboardContainer, $fretboardBody, settings) {
+            let width = jQuery(window).width();
+            let height;
 
             if (width <= 768) {
                 height = settings.tuning.length * 26;
@@ -53,25 +36,26 @@
                 height: height
             };
         };
-        var noteCircles = [3, 5, 7, 9, 12, 15, 17, 19, 21, 24];
-        var intervals = ["1", "b2", "2", "b3", "3", "4", "b5", "5", "b6", "6", "b7", "7"];
-        var root = "C";
-        var animationSpeed = 400; // ms
-        var noteMode = "letter"; // or "interval"
+        let noteCircles = [3, 5, 7, 9, 12, 15, 17, 19, 21, 24];
+        let intervals = ["1", "b2", "2", "b3", "3", "4", "b5", "5", "b6", "6", "b7", "7"];
+        let root = "C";
+        let animationSpeed = 400; // ms
+        let noteMode = "letter"; // or "interval"
 
 
 
-        var clickedNotesChangedFunc = function () {
-            var $fretboard = jQuery(".my-fretboard-js");
-            var api = $fretboard.data("api");
-            var clickedNotes = api.getClickedNotes();
-            var clickedNoteLetters = clickedNotes.map(function (e) {
+        let clickedNotesChangedFunc = function () {
+            let $fretboard = jQuery(".my-fretboard-js");
+            let api = $fretboard.data("api");
+            let clickedNotes = api.getClickedNotes();
+            console.log(clickedNotes);
+            let clickedNoteLetters = clickedNotes.map(function (e) {
                 return e.notes[0].letter;
             });
 
             let first = clickedNotes[0];
             if (first != null) {
-                var clickedString = first.string;
+                let clickedString = first.string;
                 if (clickedNoteLetters[0] === randomNote.note && randomString === getStringNumber(clickedString)) {
                     showSuccess = true;
                     successCounter++;
@@ -116,9 +100,12 @@
     }
 
     let highlightRandomString = () => {
-        jQuery(".string").css("background-color", "white");
+        // jQuery(".string").css("background-color", "white");
+        const allStrings = document.querySelectorAll(".string");
+        allStrings.forEach(x => x.style.backgroundColor = "white");
         randomString = Math.floor(Math.random() * 6) + 1;
-        jQuery("#string" + randomString).css("background-color", "#00d5ff");
+        // jQuery("#string" + randomString).css("background-color", "#00d5ff");
+        document.querySelector("#string" + randomString).style.backgroundColor = "#00d5ff";
     }
 
     let pickRandomNote = () => {
@@ -146,6 +133,10 @@
 
     $: successPercentage = (successCounter + failureCounter != 0) ? Math.floor(successCounter * 100 / (successCounter + failureCounter)) : 0;
 </script>
+
+<svelte:head>
+	<title>Note selection</title>
+</svelte:head>
 
 <main>
     <h1>Note selection</h1>
