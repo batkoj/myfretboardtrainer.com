@@ -16,7 +16,7 @@
 	<ol>
 		<li class="menu-item"><a href="/home">Home</a></li>
 		<li class="menu-item">
-			<a href="/noteselection">Exercises</a>
+			<a href="/exercises">Exercises</a>
 			<ol class="sub-menu">
 				<li class="menu-item"><a href="/noteselection">Note selection</a></li>
 				<li class="menu-item"><a href="/noteidentification">Note identification</a></li>

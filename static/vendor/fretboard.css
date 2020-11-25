@@ -243,7 +243,7 @@ button {
 @media (max-width: 767px) {
 	button {
 		width: 49%;
-		height: 30px;
+		height: 45px;
 		overflow: hidden;
 		margin: 2px .5%;
 		padding: 2px;
