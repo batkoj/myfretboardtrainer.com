@@ -212,6 +212,7 @@ button {
 	padding: 10px;
 	font-size: 12px;
 	overflow: auto;
+	border-width: 1px;
 }
 
 .disclaimer {

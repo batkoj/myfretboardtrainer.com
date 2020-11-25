@@ -1,3 +1,4 @@
+<!-- <script lang="typescript"> -->
 <script>
     import { onMount } from 'svelte';
     import { fly, fade } from 'svelte/transition';
@@ -92,11 +93,14 @@
 		if (note.note === randomNoteLetter) {
 			showSuccess = true;
 			successCounter++;
+			document.querySelector("#button" + note.note).style.backgroundColor = "#79c779";
 			pickRandomNote();
 			setTimeout(function () {
+				document.querySelectorAll(".button").forEach(x => x.style.backgroundColor = "#efefef");
 				showSuccess = false;
-			}, 1000);
+			}, 500);
 		} else {
+			document.querySelector("#button" + note.note).style.backgroundColor = "red";
 			failureCounter++;
 		}
 	}
@@ -122,7 +126,7 @@
 	
 	<div class="buttons">
 		{#each wholeNoteLetters as note}
-			<button class="button" on:click={() => handleClick({note})}>{note}</button>
+			<button id="button{note}" class="button" on:click={() => handleClick({note})}>{note}</button>
 		{/each}
 	</div>
 </main>
