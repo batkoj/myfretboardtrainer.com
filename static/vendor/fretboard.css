@@ -213,6 +213,7 @@ button {
 	font-size: 12px;
 	overflow: auto;
 	border-width: 1px;
+	outline: none;
 }
 
 .disclaimer {

@@ -20,5 +20,5 @@
 </script>
 
 <main>
-    <div in:fade="{{duration: 600}}" class="my-fretboard-js dark-theme"></div>
+    <div class="my-fretboard-js dark-theme"></div>
 </main>
