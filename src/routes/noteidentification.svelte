@@ -60,6 +60,7 @@
 	
     function afterFretboardInit() {
 		pickRandomNote();
+		document.querySelectorAll(".note-display").forEach(x => x.style.visibility = "hidden");
 	}
 	
 	function pickRandomNote() {
@@ -70,7 +71,6 @@
 		let randomNote = pickNoteUntilWhole(api);
 
 		api.setClickedNotes(randomNote);
-		document.querySelectorAll(".note-display").forEach(x => x.style.visibility = "hidden");
 	}
 
 	function pickNoteUntilWhole(api) {
