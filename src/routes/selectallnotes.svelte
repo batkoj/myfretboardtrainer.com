@@ -57,7 +57,7 @@
                     api.clearClickedNotes();
                     showSuccess = false;
                     pickRandomNote();
-                }, 2500);
+                }, 1900);
             }
         }
 
@@ -99,7 +99,7 @@
 
 <main>
     <h1>Select the note's locations</h1>
-    <div>Select the following note on all string: </div>
+    <div>Select the following note on all strings: </div>
     <!-- <img alt="refresh" src="refresh.png"> -->
     {#key randomNote}
         <div class="randomNote" in:fade="{{duration: 600}}">{randomNote.note}</div>
