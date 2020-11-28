@@ -1,7 +1,7 @@
 <script>
     import { onMount } from 'svelte';
     import { fly, fade } from 'svelte/transition';
-	import Fretboard from '../components/Fretboard.svelte';
+    import Fretboard from '../components/Fretboard.svelte';
 
 
     let options;
@@ -15,7 +15,7 @@
     let allNoteLetters = ["C", "C#/Db", "D", "D#/Eb", "E", "F", "F#/Gb", "G", "Ab/G#", "A", "A#/Bb", "B"];
     let noteLettersToPickFrom = ["C", "D", "E", "F", "G", "A", "B"];
 
-	onMount(async () => {
+    onMount(async () => {
         let isChordMode = true;
         let isDisabled = false;
         
@@ -133,7 +133,7 @@
 </script>
 
 <svelte:head>
-	<title>Note selection</title>
+    <title>Note selection</title>
 </svelte:head>
 
 <main>

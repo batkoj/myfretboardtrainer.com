@@ -1,5 +1,5 @@
 <svelte:head>
-	<title>Home</title>
+    <title>Home</title>
 </svelte:head>
 
 <h1>Welcome</h1>
@@ -13,8 +13,8 @@
 </div>
 
 <style>
-	.links {
-		display: flex;
-		flex-direction: column;
-	}
+    .links {
+        display: flex;
+        flex-direction: column;
+    }
 </style>

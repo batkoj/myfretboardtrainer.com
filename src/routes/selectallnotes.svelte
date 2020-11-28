@@ -1,7 +1,7 @@
 <script>
     import { onMount } from 'svelte';
     import { fade } from 'svelte/transition';
-	import Fretboard from '../components/Fretboard.svelte';
+    import Fretboard from '../components/Fretboard.svelte';
 
 
     let options;
@@ -13,7 +13,7 @@
     let allNoteLetters = ["C", "C#/Db", "D", "D#/Eb", "E", "F", "F#/Gb", "G", "Ab/G#", "A", "A#/Bb", "B"];
     let noteLettersToPickFrom = ["C", "D", "E", "F", "G", "A", "B"];
 
-	onMount(async () => {
+    onMount(async () => {
         let isChordMode = true;
         let isDisabled = false;
         
@@ -44,21 +44,21 @@
         let clickedNotesChangedFunc = function () {
             let $fretboard = jQuery(".my-fretboard-js");
             let api = $fretboard.data("api");
-			let clickedNotes = api.getClickedNotes();
+            let clickedNotes = api.getClickedNotes();
 
             let clickedNoteLetters = clickedNotes.map(function (e) {
                 return e.notes[0].letter;
-			});
-			
-			const allEqual = clickedNoteLetters.every( x => x === clickedNoteLetters[0]);
-			if (clickedNoteLetters.length === 6 && allEqual && clickedNoteLetters[0] === randomNote.note) {
-				showSuccess = true;
-				setTimeout(function () {
-					api.clearClickedNotes();
-					showSuccess = false;
-					pickRandomNote();
-				}, 2500);
-			}
+            });
+            
+            const allEqual = clickedNoteLetters.every( x => x === clickedNoteLetters[0]);
+            if (clickedNoteLetters.length === 6 && allEqual && clickedNoteLetters[0] === randomNote.note) {
+                showSuccess = true;
+                setTimeout(function () {
+                    api.clearClickedNotes();
+                    showSuccess = false;
+                    pickRandomNote();
+                }, 2500);
+            }
         }
 
         options = {
@@ -80,27 +80,27 @@
     
     
     let afterFretboardInit = () => {
-		pickRandomNote();
-		// document.querySelectorAll(".note-display").forEach(x => x.style.visibility = "hidden");
+        pickRandomNote();
+        // document.querySelectorAll(".note-display").forEach(x => x.style.visibility = "hidden");
     }
 
     let pickRandomNote = () => {
-		let temp = noteLettersToPickFrom[Math.floor(Math.random() * noteLettersToPickFrom.length)];
-		while (temp === randomNote.note) {
-			temp = noteLettersToPickFrom[Math.floor(Math.random() * noteLettersToPickFrom.length)];
-		}
+        let temp = noteLettersToPickFrom[Math.floor(Math.random() * noteLettersToPickFrom.length)];
+        while (temp === randomNote.note) {
+            temp = noteLettersToPickFrom[Math.floor(Math.random() * noteLettersToPickFrom.length)];
+        }
         randomNote.note = temp;
     }
 </script>
 
 <svelte:head>
-	<title>Select all notes</title>
+    <title>Select all notes</title>
 </svelte:head>
 
 <main>
     <h1>Select the note's locations</h1>
-	<div>Select the following note on all string: </div>
-	<!-- <img alt="refresh" src="refresh.png"> -->
+    <div>Select the following note on all string: </div>
+    <!-- <img alt="refresh" src="refresh.png"> -->
     {#key randomNote}
         <div class="randomNote" in:fade="{{duration: 600}}">{randomNote.note}</div>
     {/key}
@@ -116,10 +116,10 @@
 
 
 <style>
-	/* img {
-		width: 25px;
-    	cursor: pointer;
-	} */
+    /* img {
+        width: 25px;
+        cursor: pointer;
+    } */
 
     .randomNote {
         color: #1e8094;
