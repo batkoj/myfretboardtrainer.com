@@ -101,10 +101,15 @@
     let highlightRandomString = () => {
         // jQuery(".string").css("background-color", "white");
         const allStrings = document.querySelectorAll(".string");
-        allStrings.forEach(x => x.style.backgroundColor = "white");
+        allStrings.forEach(x => {
+            x.style.backgroundColor = "white";
+            x.style.height = "1px";
+        });
         randomString = Math.floor(Math.random() * 6) + 1;
         // jQuery("#string" + randomString).css("background-color", "#00d5ff");
-        document.querySelector("#string" + randomString).style.backgroundColor = "#00d5ff";
+        let string = document.querySelector("#string" + randomString);
+        string.style.backgroundColor = "#00d5ff";
+        string.style.height = "3px";
     }
 
     let pickRandomNote = () => {
