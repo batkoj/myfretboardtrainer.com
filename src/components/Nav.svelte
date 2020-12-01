@@ -193,9 +193,15 @@
 		display: none;
 		z-index: 999999;
 	}
-	.menu-item:hover > .sub-menu {
-		display: block;
+
+	@media screen and (min-width: 768px) {
+		.menu-item:hover > .sub-menu {
+			display: block;
+		}
 	}
+	/* .menu-item:hover > .sub-menu {
+		display: block;
+	} */
 	/* @media screen and (max-width: 600px) {
 		.sub-menu {
 			width: 100vw;
