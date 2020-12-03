@@ -48,7 +48,6 @@
             let $fretboard = jQuery(".my-fretboard-js");
             let api = $fretboard.data("api");
             let clickedNotes = api.getClickedNotes();
-            console.log(clickedNotes);
             let clickedNoteLetters = clickedNotes.map(function (e) {
                 return e.notes[0].letter;
             });

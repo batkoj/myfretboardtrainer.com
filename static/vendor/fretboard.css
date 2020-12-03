@@ -214,6 +214,8 @@ button {
 	overflow: auto;
 	border-width: 1px;
 	outline: none;
+	border-radius: 0;
+	-webkit-appearance: none;
 }
 
 .disclaimer {
@@ -230,6 +232,10 @@ button {
 
 .fretboard-container .note.clicked.orange {
 	background: orange;
+}
+
+.fretboard-container .note.clicked.blue {
+	background: blue;
 }
 
 .json {

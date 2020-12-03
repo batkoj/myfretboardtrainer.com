@@ -82,7 +82,6 @@
         }];
 
         randomNoteLetter = api.getNoteByFretNumber(randomString, randomFret).letter;
-        console.log(randomNoteLetter);
         if (!wholeNoteLetters.some( x => x === randomNoteLetter)) {
              return pickNoteUntilWhole(api)
         }
@@ -126,7 +125,7 @@
     
     <div class="buttons">
         {#each wholeNoteLetters as note}
-            <button id="button{note}" class="button" on:click={() => handleClick({note})}>{note}</button>
+            <button id="button{note}" on:click={() => handleClick({note})}>{note}</button>
         {/each}
     </div>
 </main>

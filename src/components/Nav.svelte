@@ -24,6 +24,7 @@
 			</ol>
 		</li>
 		<!-- <li class="menu-item"><a href="#0">About</a></li> -->
+		<li class="menu-item"><a href="/scales">Scales</a></li>
 		<li class="menu-item"><a href="/contact">Contact</a></li>
 	</ol>
 </nav>
@@ -194,7 +195,7 @@
 		z-index: 999999;
 	}
 
-	@media screen and (min-width: 768px) {
+	@media (hover: hover) {
 		.menu-item:hover > .sub-menu {
 			display: block;
 		}

@@ -16,5 +16,6 @@
     .links {
         display: flex;
         flex-direction: column;
+        font-size: 23px;
     }
 </style>
