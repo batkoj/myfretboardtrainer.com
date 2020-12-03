@@ -95,7 +95,7 @@
             document.querySelector("#button" + note.note).style.backgroundColor = "#79c779";
             pickRandomNote();
             setTimeout(function () {
-                document.querySelectorAll(".button").forEach(x => x.style.backgroundColor = "#efefef");
+                document.querySelectorAll("button").forEach(x => x.style.backgroundColor = "#efefef");
                 showSuccess = false;
             }, 500);
         } else {

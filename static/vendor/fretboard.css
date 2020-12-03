@@ -235,7 +235,15 @@ button {
 }
 
 .fretboard-container .note.clicked.blue {
-	background: blue;
+	background: #4747dc; /*#5757e4*/
+}
+
+.fretboard-container .note.clicked.defaultNoteColor {
+	background: #8a7c7c;
+}
+
+.fretboard-container .note.clicked.rootColor {
+	background: #c54747;
 }
 
 .json {

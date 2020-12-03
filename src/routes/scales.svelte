@@ -9,7 +9,7 @@
 
     let major = true;
     let key = "C";
-    let scale = "caged"
+    let scale = "pentatonic"
 
     onMount(async () => {
         let isChordMode = true;
@@ -118,7 +118,7 @@
 
 <style>
     .selected {
-        background-color: #6ddcdc;
+        background-color: #6bd6d6;
     }
     
     .buttonSection {
