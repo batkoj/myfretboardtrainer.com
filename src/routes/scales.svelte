@@ -9,7 +9,7 @@
 
     let major = true;
     let key = "C";
-    let scale = "pentatonic"
+    let scale = "caged"
 
     onMount(async () => {
         let isChordMode = true;
