@@ -9,7 +9,8 @@
 
     let major = true;
     let key = "C";
-    let scale = "caged"
+    let scale = "pentatonic";
+    let noteMode = "letter"; // or "interval"
 
     onMount(async () => {
         let isChordMode = true;
@@ -32,10 +33,7 @@
         };
         let noteCircles = [3, 5, 7, 9, 12, 15, 17, 19, 21, 24];
         let intervals = ["1", "b2", "2", "b3", "3", "4", "b5", "5", "b6", "6", "b7", "7"];
-        let root = "C";
         let animationSpeed = 400; // ms
-        let noteMode = "letter"; // or "interval"
-
 
         let clickedNotesChangedFunc = function () {
         }
@@ -48,7 +46,7 @@
             noteLetters: allNoteLetters,
             noteMode: noteMode,
             intervals: intervals,
-            root: root,
+            root: key,
             animationSpeed: animationSpeed,
             noteCircles: noteCircles,
             dimensionsFunc: dimensionsFunc,
@@ -76,6 +74,7 @@
         let api = $fretboard.data("api");
         api.clearClickedNotes();
 
+        api.setRoot(key);
         let notes = scaleDictionary.get(major).get(key).get(scale);
         api.setClickedNotes(notes);
     }

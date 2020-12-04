@@ -1,5 +1,5 @@
 <script>
-	import Noteselection from "./noteselection.svelte";
+	import Home from "./home.svelte";
 </script>
 
-<Noteselection/>
+<Home/>
