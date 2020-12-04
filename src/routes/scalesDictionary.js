@@ -32,7 +32,32 @@ let baseForScaleCMajor = fillIn6thString([{string: standardTuning[0], notes: [{f
                     {string: standardTuning[3], notes: [{fret: 0}, {fret: 2}, {fret: 3}, {fret: 5}, {fret: 7}, {fret: 9}, {fret: 10, cssClass: rootColor}]},
                     {string: standardTuning[4], notes: [{fret: 0}, {fret: 2}, {fret: 3, cssClass: rootColor}, {fret: 5}, {fret: 7}, {fret: 8}, {fret: 10}]}]);
 
-                    
+let baseForCagedInAMinor = [{string: standardTuning[0], notes: [{fret: 0}, {fret: 5, cssClass: rootColor}, {fret: 8}]},
+                            {string: standardTuning[1], notes: [{fret: 1}, {fret: 5}, {fret: 10, cssClass: rootColor}]},
+                            {string: standardTuning[2], notes: [{fret: 2, cssClass: rootColor}, {fret: 5}, {fret: 9}]},
+                            {string: standardTuning[3], notes: [{fret: 2}, {fret: 7, cssClass: rootColor}, {fret: 10}]},
+                            {string: standardTuning[4], notes: [{fret: 0, cssClass: rootColor}, {fret: 3}, {fret: 7}]},
+                            {string: standardTuning[5], notes: [{fret: 5, cssClass: rootColor}]}];
+let baseForArpeggioInAMinor = fillIn6thString([{string: standardTuning[0], notes: [{fret: 0}, {fret: 5, cssClass: rootColor}, {fret: 8}]},
+                    {string: standardTuning[1], notes: [{fret: 1}, {fret: 5}, {fret: 10, cssClass: rootColor}]},
+                    {string: standardTuning[2], notes: [{fret: 2, cssClass: rootColor}, {fret: 5}, {fret: 9}]},
+                    {string: standardTuning[3], notes: [{fret: 2}, {fret: 7, cssClass: rootColor}, {fret: 10}]},
+                    {string: standardTuning[4], notes: [{fret: 0, cssClass: rootColor}, {fret: 3}, {fret: 7}]}]);
+let baseForPentatonicInAMinor = fillIn6thString([{string: standardTuning[0], notes: [{fret: 0}, {fret: 3}, {fret: 5, cssClass: rootColor}, {fret: 8}, {fret: 10}]},
+                            {string: standardTuning[1], notes: [{fret: 1}, {fret: 3}, {fret: 5}, {fret: 8}, {fret: 10, cssClass: rootColor}]},
+                            {string: standardTuning[2], notes: [{fret: 0}, {fret: 2, cssClass: rootColor}, {fret: 5}, {fret: 7}, {fret: 9}]},
+                            {string: standardTuning[3], notes: [{fret: 0}, {fret: 2}, {fret: 5}, {fret: 7, cssClass: rootColor}, {fret: 10}]},
+                            {string: standardTuning[4], notes: [{fret: 0, cssClass: rootColor}, {fret: 3}, {fret: 5}, {fret: 7}, {fret: 10}]}]);
+let baseForBluesInAMinor = fillIn6thString([{string: standardTuning[0], notes: [{fret: 0}, {fret: 3}, {fret: 5, cssClass: rootColor}, {fret: 8}, {fret: 10}, {fret: 11, cssClass: blueNote}]},
+                        {string: standardTuning[1], notes: [{fret: 1}, {fret: 3}, {fret: 4, cssClass: blueNote}, {fret: 5}, {fret: 8}, {fret: 10, cssClass: rootColor}]},
+                        {string: standardTuning[2], notes: [{fret: 0}, {fret: 2, cssClass: rootColor}, {fret: 5}, {fret: 7}, {fret: 8, cssClass: blueNote}, {fret: 9}]},
+                        {string: standardTuning[3], notes: [{fret: 0}, {fret: 1, cssClass: blueNote}, {fret: 2}, {fret: 5}, {fret: 7, cssClass: rootColor}, {fret: 10}]},
+                        {string: standardTuning[4], notes: [{fret: 0, cssClass: rootColor}, {fret: 3}, {fret: 5}, {fret: 6, cssClass: blueNote}, {fret: 7}, {fret: 10}]}]);
+let baseForScaleAMinor = fillIn6thString([{string: standardTuning[0], notes: [{fret: 0}, {fret: 1}, {fret: 3}, {fret: 5, cssClass: rootColor}, {fret: 7}, {fret: 8}, {fret: 10}]},
+                    {string: standardTuning[1], notes: [{fret: 0}, {fret: 1}, {fret: 3}, {fret: 5}, {fret: 6}, {fret: 8}, {fret: 10, cssClass: rootColor}]},
+                    {string: standardTuning[2], notes: [{fret: 0}, {fret: 2, cssClass: rootColor}, {fret: 4}, {fret: 5}, {fret: 7}, {fret: 9}, {fret: 10}]},
+                    {string: standardTuning[3], notes: [{fret: 0}, {fret: 2}, {fret: 3}, {fret: 5}, {fret: 7, cssClass: rootColor}, {fret: 9}, {fret: 10}]},
+                    {string: standardTuning[4], notes: [{fret: 0, cssClass: rootColor}, {fret: 2}, {fret: 3}, {fret: 5}, {fret: 7}, {fret: 8}, {fret: 10}]}]);
 
 let majorDictionary = new Map();
 majorDictionary.set("C", createDictionaryFromCMajorBases());
@@ -43,8 +68,15 @@ majorDictionary.set("G", createDictionaryFromCMajorBases(7));
 majorDictionary.set("A", createDictionaryFromCMajorBases(9));
 majorDictionary.set("B", createDictionaryFromCMajorBases(11));
 scaleDictionary.set(true, majorDictionary);
-let minorDic = new Map();
-scaleDictionary.set(false, minorDic);
+let minorDictionary = new Map();
+minorDictionary.set("A", createDictionaryFromAminorBases());
+minorDictionary.set("B", createDictionaryFromAminorBases(2));
+minorDictionary.set("C", createDictionaryFromAminorBases(3));
+minorDictionary.set("D", createDictionaryFromAminorBases(5));
+minorDictionary.set("E", createDictionaryFromAminorBases(7));
+minorDictionary.set("F", createDictionaryFromAminorBases(8));
+minorDictionary.set("G", createDictionaryFromAminorBases(10));
+scaleDictionary.set(false, minorDictionary);
 
 
 
@@ -55,6 +87,16 @@ function createDictionaryFromCMajorBases(numberOfFretsToMoveBase = 0) {
     oneKeyDictionary.set("pentatonic", fillInMissingData(moveBaseForward(baseForPentatonicInCMajor, numberOfFretsToMoveBase)));
     oneKeyDictionary.set("blues", fillInMissingData(moveBaseForward(baseForBluesInCMajor, numberOfFretsToMoveBase)));
     oneKeyDictionary.set("scale", fillInMissingData(moveBaseForward(baseForScaleCMajor, numberOfFretsToMoveBase)));
+    return oneKeyDictionary;
+}
+
+function createDictionaryFromAminorBases(numberOfFretsToMoveBase = 0) {
+    let oneKeyDictionary = new Map();
+    oneKeyDictionary.set("caged", fillInMissingData(moveBaseForward(baseForCagedInAMinor, numberOfFretsToMoveBase)));
+    oneKeyDictionary.set("arpeggio", fillInMissingData(moveBaseForward(baseForArpeggioInAMinor, numberOfFretsToMoveBase)));
+    oneKeyDictionary.set("pentatonic", fillInMissingData(moveBaseForward(baseForPentatonicInAMinor, numberOfFretsToMoveBase)));
+    oneKeyDictionary.set("blues", fillInMissingData(moveBaseForward(baseForBluesInAMinor, numberOfFretsToMoveBase)));
+    oneKeyDictionary.set("scale", fillInMissingData(moveBaseForward(baseForScaleAMinor, numberOfFretsToMoveBase)));
     return oneKeyDictionary;
 }
 

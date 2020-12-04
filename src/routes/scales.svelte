@@ -66,7 +66,7 @@
         try {
             drawScale(major, key, scale);
         } catch (ignored) {
-            // this fails for the first time when jQuery is not loaded yet
+            // this fails for the first time(on page load) when jQuery is not loaded yet
             // console.log(ignored);
         }
     }
