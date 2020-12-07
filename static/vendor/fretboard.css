@@ -39,6 +39,7 @@ THE SOFTWARE.
 	overridden. */
 	height: 210px; 
 	margin: 0 auto;
+	padding-bottom: 20px;
 }
 
 .fretboard-scroll-wrapper {
@@ -269,5 +270,23 @@ button {
 
 	.disclaimer {
 		font-size: 14px;
+	}
+}
+
+.fretNum{
+	margin-top: 108px;
+}
+
+.fretNum12{
+	margin-top: 158px;
+}
+
+@media (max-width: 735px) {
+	.fretNum{
+		margin-top: 88px;
+	}
+	
+	.fretNum12{
+		margin-top: 131px;
 	}
 }

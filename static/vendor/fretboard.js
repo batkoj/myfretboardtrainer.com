@@ -1156,7 +1156,10 @@ THE SOFTWARE.
         }
 
         function $createNoteCircle(fret) {
-            return $createDiv(noteCircleCssClass).data("fret", fret);
+            var clazz = (fret==12) ? "fretNum12" : "fretNum";
+            var div = $("<div class='" + noteCircleCssClass + "'><div class='" + clazz + "'>" + fret + "</div></div>");
+            div.data("fret", fret);
+            return div;
         }
 
         function $createFretLine() {

@@ -10,7 +10,7 @@
     let major = true;
     let key = "C";
     let scale = "pentatonic";
-    let noteMode = "letter"; // or "interval"
+    let intervalsCheckbox = false;
 
     onMount(async () => {
         let isChordMode = true;
@@ -44,7 +44,7 @@
             isChordMode: isChordMode,
             noteClickingDisabled: isDisabled,
             noteLetters: allNoteLetters,
-            noteMode: noteMode,
+            noteMode: getNoteModeFromBoolean(intervalsCheckbox),
             intervals: intervals,
             root: key,
             animationSpeed: animationSpeed,
@@ -77,6 +77,18 @@
         api.setRoot(key);
         let notes = scaleDictionary.get(major).get(key).get(scale);
         api.setClickedNotes(notes);
+    }
+
+    $: {
+        try {
+            let $fretboard = jQuery(".my-fretboard-js");
+            let api = $fretboard.data("api");
+            api.setNoteMode(getNoteModeFromBoolean(intervalsCheckbox));
+        } catch (ignored) {}
+    }
+
+    function getNoteModeFromBoolean(checked) {
+        return checked ? "interval" : "letter";
     }
 
 </script>
@@ -112,10 +124,14 @@
     {#if options != undefined}
         <Fretboard options={options} on:fretboardInitialized={afterFretboardInit}/>
     {/if}
+    Show intervals <input class="intevalCheck" type=checkbox bind:checked={intervalsCheckbox}>
 </main>
 
 
 <style>
+    .intevalCheck{
+        margin-top: 50px;
+    }
     .selected {
         background-color: #6bd6d6;
     }
