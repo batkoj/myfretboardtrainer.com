@@ -145,10 +145,11 @@
         display: flex;
         justify-content: center;
     }
-    .majorMinor button {
-        width: 10%;
+    @media (min-width: 767px) {
+        .majorMinor button {
+            width: 10%;
+        }
     }
-
     .keys {
         display: flex;
         justify-content: center;

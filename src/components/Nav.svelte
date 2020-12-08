@@ -14,18 +14,18 @@
 <nav class="menu">
 	<!-- <div class="logo">asdasd</div> -->
 	<ol>
-		<li class="menu-item"><a href="/home">Home</a></li>
+		<li class="menu-item"><a href="/home/">Home</a></li>
 		<li class="menu-item">
-			<a href="/exercises">Exercises</a>
+			<a href="/exercises/">Exercises</a>
 			<ol class="sub-menu">
-				<li class="menu-item"><a href="/noteselection">Note selection</a></li>
-				<li class="menu-item"><a href="/noteidentification">Note identification</a></li>
-				<li class="menu-item"><a href="/selectallnotes">Select the note's locations</a></li>
+				<li class="menu-item"><a href="/noteselection/">Note selection</a></li>
+				<li class="menu-item"><a href="/noteidentification/">Note identification</a></li>
+				<li class="menu-item"><a href="/selectallnotes/">Select the note's locations</a></li>
 			</ol>
 		</li>
 		<!-- <li class="menu-item"><a href="#0">About</a></li> -->
-		<li class="menu-item"><a href="/scales">Scales</a></li>
-		<li class="menu-item"><a href="/contact">Contact</a></li>
+		<li class="menu-item"><a href="/scales/">Scales</a></li>
+		<li class="menu-item"><a href="/contact/">Contact</a></li>
 	</ol>
 </nav>
 

@@ -6,9 +6,9 @@
 	<h1>Exercises</h1>
 
 	<div class="links">
-		<a href="/noteselection">Note selection</a>
-		<a href="/noteidentification">Note identification</a>
-		<a href="/selectallnotes">Select the note's locations</a>
+		<a href="/noteselection/">Note selection</a>
+		<a href="/noteidentification/">Note identification</a>
+		<a href="/selectallnotes/">Select the note's locations</a>
 	</div>
 </main>
 
