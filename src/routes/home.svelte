@@ -1,5 +1,5 @@
 <svelte:head>
-    <title>Home</title>
+    <title>My Fretboard Trainer</title>
 </svelte:head>
 
 <h1>Welcome</h1>
