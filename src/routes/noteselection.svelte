@@ -11,9 +11,11 @@
     let showSuccess = false;
     let successCounter = 0;
     let failureCounter = 0;
+    let includeFlats = false;
+
 
     let allNoteLetters = ["C", "C#/Db", "D", "D#/Eb", "E", "F", "F#/Gb", "G", "Ab/G#", "A", "A#/Bb", "B"];
-    let noteLettersToPickFrom = ["C", "D", "E", "F", "G", "A", "B"];
+    let notesLettersWithoutFlats = ["C", "D", "E", "F", "G", "A", "B"];
 
     onMount(async () => {
         let isChordMode = true;
@@ -94,7 +96,7 @@
     
     let afterFretboardInit = () => {
         highlightRandomString();
-        pickRandomNote();
+        pickRandomNote(includeFlats);
     }
 
     let highlightRandomString = () => {
@@ -111,8 +113,9 @@
         string.style.height = "3px";
     }
 
-    let pickRandomNote = () => {
-        randomNote.note = noteLettersToPickFrom[Math.floor(Math.random() * noteLettersToPickFrom.length)];
+    let pickRandomNote = (includeFlats) => {
+        let notesToPickFrom = includeFlats ? allNoteLetters : notesLettersWithoutFlats;
+        randomNote.note = notesToPickFrom[Math.floor(Math.random() * notesToPickFrom.length)];
     }
    
     let getStringNumber = (string) => {
@@ -134,6 +137,8 @@
     }
 
     $: successPercentage = (successCounter + failureCounter != 0) ? Math.floor(successCounter * 100 / (successCounter + failureCounter)) : 0;
+
+    $: pickRandomNote(includeFlats);
 </script>
 
 <svelte:head>
@@ -155,6 +160,9 @@
         CORRECT!
     </div>
     <span>{successCounter} / {failureCounter} ({successPercentage}%)</span>
+    <div>
+        Include flats/sharps <input class="includeFlats" type=checkbox bind:checked={includeFlats}>
+    </div>
 </main>
 
 <style>
@@ -167,5 +175,9 @@
         background-color: #79c779;
         color: white; 
         text-align: center;
+    }
+
+    .includeFlats {
+        margin-top: 50px;
     }
 </style>
