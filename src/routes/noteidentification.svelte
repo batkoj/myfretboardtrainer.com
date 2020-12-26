@@ -75,7 +75,7 @@
 
     function pickNoteUntilWhole(api) {
         let randomString = standardTuning[Math.floor(Math.random() * standardTuning.length)];
-        let randomFret = Math.floor(Math.random() * 11);
+        let randomFret = Math.floor(Math.random() * 13);
         let randomNote = [{
             string: randomString, 
             notes: [{fret: randomFret}]
