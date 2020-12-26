@@ -12,6 +12,7 @@
     let successCounter = 0;
     let failureCounter = 0;
     let includeFlats = false;
+    let numberOfFrets = "12";
 
 
     let allNoteLetters = ["C", "C#/Db", "D", "D#/Eb", "E", "F", "F#/Gb", "G", "Ab/G#", "A", "A#/Bb", "B"];
@@ -23,7 +24,6 @@
         
         let standardTuning = [{letter: "E", octave: 4}, {letter: "B", octave: 3}, {letter: "G", octave: 3}, {letter: "D", octave: 3}, {letter: "A", octave: 2}, {letter: "E", octave: 2}];
 
-        let numFrets = 12;
         let dimensionsFunc = function ($fretboardContainer, $fretboardBody, settings) {
             let width = jQuery(window).width();
             let height;
@@ -78,7 +78,7 @@
 
         options = {
             tuning: standardTuning,
-            numFrets: numFrets,
+            numFrets: parseInt(numberOfFrets),
             isChordMode: isChordMode,
             noteClickingDisabled: isDisabled,
             noteLetters: allNoteLetters,
@@ -139,6 +139,12 @@
     $: successPercentage = (successCounter + failureCounter != 0) ? Math.floor(successCounter * 100 / (successCounter + failureCounter)) : 0;
 
     $: pickRandomNote(includeFlats);
+
+    $: {
+        if (options != null) {
+            options.numFrets = parseInt(numberOfFrets);
+        }
+    }
 </script>
 
 <svelte:head>
@@ -151,9 +157,11 @@
     {#key randomNote}
         <div class="randomNote" in:fade="{{duration: 600}}">{randomNote.note}</div>
     {/key}
-    {#if options != undefined}
-        <Fretboard options={options} on:fretboardInitialized={afterFretboardInit}/>
-    {/if}
+    {#key options}
+        {#if options != undefined}
+            <Fretboard options={options} on:fretboardInitialized={afterFretboardInit}/>
+        {/if}
+    {/key}
 
 
     <div style="visibility: {showSuccess ? 'visible' : 'hidden'}" id="success">
@@ -161,7 +169,17 @@
     </div>
     <span>{successCounter} / {failureCounter} ({successPercentage}%)</span>
     <div>
-        Include flats/sharps <input class="includeFlats" type=checkbox bind:checked={includeFlats}>
+        Include flats/sharps: <input class="includeFlats" type=checkbox bind:checked={includeFlats}>
+    </div>
+    <div>
+        Number of frets:
+        <select class="selectbox" bind:value={numberOfFrets}>
+            <option value="12">12</option>
+            <option value="15">15</option>
+            <option value="17">17</option>
+            <option value="19">19</option>
+            <option value="21">21</option>
+        </select>
     </div>
 </main>
 
@@ -179,5 +197,13 @@
 
     .includeFlats {
         margin-top: 50px;
+    }
+
+    .selectbox {
+        height: 24px;
+        font-size: medium;
+        background-color: #f9f9f9;
+        width: 50px;
+        text-align-last: right;
     }
 </style>
