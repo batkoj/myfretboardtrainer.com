@@ -197,13 +197,14 @@
 
     .includeFlats {
         margin-top: 50px;
+        margin-left: 10px;
     }
 
     .selectbox {
         height: 24px;
         font-size: medium;
         background-color: #f9f9f9;
-        width: 50px;
+        width: 60px;
         text-align-last: right;
     }
 </style>
