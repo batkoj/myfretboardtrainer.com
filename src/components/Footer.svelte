@@ -1,5 +1,10 @@
+<script>
+    let d = new Date();
+    var year = d.getFullYear();
+</script>
+
 <main>
-    <div>© 2020 Jiri Batko. All Rights Reserved.</div>
+    <div>© 2020-{year} Jiri Batko. All Rights Reserved.</div>
 </main>
 
 <style>
