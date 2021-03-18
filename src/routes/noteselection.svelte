@@ -238,7 +238,7 @@
     }
 
     .includeStringsText {
-        width: 120px;
+        width: 125px;
     }
 
     .stringButtons {
@@ -247,7 +247,7 @@
     }
 
     button {
-        width: 20px;
+        width: 22px;
         height: 25px;
         margin: 1px;
         padding: 0px;
