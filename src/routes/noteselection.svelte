@@ -14,7 +14,8 @@
     let includeFlats = false;
     let numberOfFrets = "12";
 
-
+    let allStringNumbers, stringsIncluded
+    allStringNumbers = stringsIncluded = [1, 2, 3, 4, 5, 6];
     let allNoteLetters = ["C", "C#/Db", "D", "D#/Eb", "E", "F", "F#/Gb", "G", "Ab/G#", "A", "A#/Bb", "B"];
     let notesLettersWithoutFlats = ["C", "D", "E", "F", "G", "A", "B"];
 
@@ -95,18 +96,21 @@
     
     
     let afterFretboardInit = () => {
-        highlightRandomString();
+        highlightRandomString(stringsIncluded);
         pickRandomNote(includeFlats);
     }
 
-    let highlightRandomString = () => {
+    let highlightRandomString = (stringsIncluded) => {
         // jQuery(".string").css("background-color", "white");
         const allStrings = document.querySelectorAll(".string");
         allStrings.forEach(x => {
             x.style.backgroundColor = "white";
             x.style.height = "1px";
         });
-        randomString = Math.floor(Math.random() * 6) + 1;
+
+        // randomString = Math.floor(Math.random() * 6) + 1;
+        randomString = stringsIncluded[Math.floor(Math.random() * stringsIncluded.length)];
+
         // jQuery("#string" + randomString).css("background-color", "#00d5ff");
         let string = document.querySelector("#string" + randomString);
         string.style.backgroundColor = "#00d5ff";
@@ -133,6 +137,17 @@
             return 4;
         } else if (string.letter === 'A') {
             return 5;
+        }
+    }
+
+    function handleIncludedStringClick(stringNr) {
+        stringNr = stringNr.stringNr;
+        if (stringsIncluded.includes(stringNr)) {
+            stringsIncluded = stringsIncluded.filter(x => x != stringNr);
+            document.querySelector("#button" + stringNr).classList.remove("pressed");
+        } else {
+            stringsIncluded.push(stringNr);
+            document.querySelector("#button" + stringNr).classList.add("pressed");
         }
     }
 
@@ -181,6 +196,14 @@
             <option value="21">21</option>
         </select>
     </div>
+    <div class="stringSelection">
+        <span class="includeStringsText">Include strings:</span>
+        <div class="stringButtons">
+            {#each allStringNumbers as stringNr}
+                <button class="pressed" id="button{stringNr}" on:click={() => handleIncludedStringClick({stringNr})}>{stringNr}</button>
+            {/each}
+        </div>
+    </div>
 </main>
 
 <style>
@@ -206,5 +229,31 @@
         background-color: #f9f9f9;
         width: 60px;
         text-align-last: right;
+    }
+
+    .stringSelection {
+        display: flex;
+        justify-content: center;
+        text-align: center;
+    }
+
+    .includeStringsText {
+        width: 120px;
+    }
+
+    .stringButtons {
+        margin-left: 10px;
+        margin-top: 2px;
+    }
+
+    button {
+        width: 20px;
+        height: 25px;
+        margin: 1px;
+        padding: 0px;
+    }
+
+    .pressed {
+        background-color: #969696;
     }
 </style>
