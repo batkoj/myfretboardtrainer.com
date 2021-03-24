@@ -1,9 +1,13 @@
 
 @import "./vendor/fretboard.css";
 
-/* :root {
-	--primary: #12658b;
-} */
+:root {
+	--CColor: #660d5f;
+	--AColor: #276921;
+	--GColor: #2b14aa;
+	--EColor: #990000;
+	--DColor: #73a108;
+}
 
 html {
 	height: 100%;

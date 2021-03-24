@@ -248,6 +248,47 @@ button {
 	background: #c54747;
 }
 
+/* CAGED colors */
+.fretboard-container .note.clicked.CColor {
+	background: var(--CColor);
+}
+
+.fretboard-container .note.clicked.CAColor {
+	background: linear-gradient(to right, var(--CColor) 35%, var(--AColor) 65%);
+}
+
+.fretboard-container .note.clicked.AColor {
+	background: var(--AColor);
+}
+
+.fretboard-container .note.clicked.AGColor {
+	background: linear-gradient(to right, var(--AColor) 35%, var(--GColor) 65%);
+}
+
+.fretboard-container .note.clicked.GColor {
+	background: var(--GColor);
+}
+
+.fretboard-container .note.clicked.GEColor {
+	background: linear-gradient(to right, var(--GColor) 35%, var(--EColor) 65%);
+}
+
+.fretboard-container .note.clicked.EColor {
+	background: var(--EColor);
+}
+
+.fretboard-container .note.clicked.EDColor {
+	background: linear-gradient(to right, var(--EColor) 35%, var(--DColor) 65%);
+}
+
+.fretboard-container .note.clicked.DColor {
+	background: var(--DColor);
+}
+
+.fretboard-container .note.clicked.DCColor {
+	background: linear-gradient(to right, var(--DColor) 35%, var(--CColor) 65%);
+}
+
 .json {
 	width: 100%;
 	clear: both;

@@ -4,13 +4,22 @@ export let scaleDictionary = new Map();
 let defaultNoteColor = "defaultNoteColor";
 let rootColor = "rootColor";
 let blueNote = "blue";
+let CColor = "CColor";
+let CAColor = "CAColor";
+let AColor = "AColor";
+let AGColor = "AGColor";
+let GColor = "GColor";
+let GEColor = "GEColor";
+let EColor = "EColor";
+let EDColor = "EDColor";
+let DCColor = "DCColor";
 
-let baseForCagedInCMajor = [{string: standardTuning[0], notes: [{fret: 0}, {fret: 8, cssClass: rootColor}]},
-                        {string: standardTuning[1], notes: [{fret: 1, cssClass: rootColor}, {fret: 5}]},
-                        {string: standardTuning[2], notes: [{fret: 0}, {fret: 5, cssClass: rootColor}, {fret: 9}]},
-                        {string: standardTuning[3], notes: [{fret: 2}, {fret: 5}, {fret: 10, cssClass: rootColor}]},
-                        {string: standardTuning[4], notes: [{fret: 3, cssClass: rootColor}, {fret: 7}, {fret: 10}]},
-                        {string: standardTuning[5], notes: [{fret: 8, cssClass: rootColor}]}];
+let baseForCagedInCMajor = [{string: standardTuning[0], notes: [{fret: 0, cssClass: DCColor}, {fret: 3, cssClass: AColor}, {fret: 8, cssClass: GEColor}]},
+                        {string: standardTuning[1], notes: [{fret: 1, cssClass: DCColor}, {fret: 5, cssClass: AGColor}]},
+                        {string: standardTuning[2], notes: [{fret: 0, cssClass: DCColor}, {fret: 5, cssClass: AGColor}, {fret: 9, cssClass: EColor}]},
+                        {string: standardTuning[3], notes: [{fret: 2, cssClass: CColor}, {fret: 5, cssClass: AGColor}, {fret: 10, cssClass: EDColor}]},
+                        {string: standardTuning[4], notes: [{fret: 3, cssClass: CAColor}, {fret: 7, cssClass: GColor}, {fret: 10, cssClass: EColor}]},
+                        {string: standardTuning[5], notes: [{fret: 8, cssClass: GEColor}]}];
 let baseForArpeggioInCMajor = fillIn6thString([{ string: standardTuning[0], notes: [{fret: 0}, {fret: 3}, {fret: 8, cssClass: rootColor}]},
                         {string: standardTuning[1], notes: [{fret: 1, cssClass: rootColor}, {fret: 5}, {fret: 8}]},
                         {string: standardTuning[2], notes: [{fret: 0}, {fret: 5, cssClass: rootColor}, {fret: 9}]},

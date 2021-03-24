@@ -9,7 +9,7 @@
 
     let major = true;
     let key = "C";
-    let scale = "pentatonic";
+    let scale = "caged";
     let intervalsCheckbox = false;
 
     onMount(async () => {
@@ -124,6 +124,15 @@
     {#if options != undefined}
         <Fretboard options={options} on:fretboardInitialized={afterFretboardInit}/>
     {/if}
+    {#if scale === 'caged'}
+        <div class="cagedLetters">
+            <span style="color:var(--CColor)">C</span>
+            <span style="color:var(--AColor)">A</span>
+            <span style="color:var(--GColor)">G</span>
+            <span style="color:var(--EColor)">E</span>
+            <span style="color:var(--DColor)">D</span>
+        </div>
+    {/if}
     Show intervals <input class="intevalCheck" type=checkbox bind:checked={intervalsCheckbox}>
 </main>
 
@@ -167,5 +176,11 @@
     .scales button {
         width: 15%;
         margin: 5px;
+    }
+
+    .cagedLetters {
+        font-weight: 900;
+        font-size: 20px;
+        margin-top: 20px;
     }
 </style>
