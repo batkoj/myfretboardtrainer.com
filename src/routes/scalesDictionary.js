@@ -12,10 +12,11 @@ let GColor = "GColor";
 let GEColor = "GEColor";
 let EColor = "EColor";
 let EDColor = "EDColor";
+let DColor = "DColor";
 let DCColor = "DCColor";
 
 let baseForCagedInCMajor = [{string: standardTuning[0], notes: [{fret: 0, cssClass: DCColor}, {fret: 3, cssClass: AColor}, {fret: 8, cssClass: GEColor}]},
-                        {string: standardTuning[1], notes: [{fret: 1, cssClass: DCColor}, {fret: 5, cssClass: AGColor}]},
+                        {string: standardTuning[1], notes: [{fret: 1, cssClass: DCColor}, {fret: 5, cssClass: AGColor}, {fret: 8, cssClass: EColor}]},
                         {string: standardTuning[2], notes: [{fret: 0, cssClass: DCColor}, {fret: 5, cssClass: AGColor}, {fret: 9, cssClass: EColor}]},
                         {string: standardTuning[3], notes: [{fret: 2, cssClass: CColor}, {fret: 5, cssClass: AGColor}, {fret: 10, cssClass: EDColor}]},
                         {string: standardTuning[4], notes: [{fret: 3, cssClass: CAColor}, {fret: 7, cssClass: GColor}, {fret: 10, cssClass: EColor}]},
@@ -41,12 +42,12 @@ let baseForScaleCMajor = fillIn6thString([{string: standardTuning[0], notes: [{f
                     {string: standardTuning[3], notes: [{fret: 0}, {fret: 2}, {fret: 3}, {fret: 5}, {fret: 7}, {fret: 9}, {fret: 10, cssClass: rootColor}]},
                     {string: standardTuning[4], notes: [{fret: 0}, {fret: 2}, {fret: 3, cssClass: rootColor}, {fret: 5}, {fret: 7}, {fret: 8}, {fret: 10}]}]);
 
-let baseForCagedInAMinor = [{string: standardTuning[0], notes: [{fret: 0}, {fret: 5, cssClass: rootColor}, {fret: 8}]},
-                            {string: standardTuning[1], notes: [{fret: 1}, {fret: 5}, {fret: 10, cssClass: rootColor}]},
-                            {string: standardTuning[2], notes: [{fret: 2, cssClass: rootColor}, {fret: 5}, {fret: 9}]},
-                            {string: standardTuning[3], notes: [{fret: 2}, {fret: 7, cssClass: rootColor}, {fret: 10}]},
-                            {string: standardTuning[4], notes: [{fret: 0, cssClass: rootColor}, {fret: 3}, {fret: 7}]},
-                            {string: standardTuning[5], notes: [{fret: 5, cssClass: rootColor}]}];
+let baseForCagedInAMinor = [{string: standardTuning[0], notes: [{fret: 0, cssClass: CAColor}, {fret: 5, cssClass: GEColor}, {fret: 8, cssClass: DColor}]},
+                            {string: standardTuning[1], notes: [{fret: 1, cssClass: AColor}, {fret: 5, cssClass: GEColor}, {fret: 10, cssClass: DCColor}]},
+                            {string: standardTuning[2], notes: [{fret: 2, cssClass: AGColor}, {fret: 5, cssClass: EColor}, {fret: 9, cssClass: DCColor}]},
+                            {string: standardTuning[3], notes: [{fret: 2, cssClass: AGColor}, {fret: 7, cssClass: EDColor}, {fret: 10, cssClass: CColor}]},
+                            {string: standardTuning[4], notes: [{fret: 0, cssClass: CAColor}, {fret: 3, cssClass: GColor}, {fret: 7, cssClass: EColor}]},
+                            {string: standardTuning[5], notes: [{fret: 5, cssClass: GEColor}]}];
 let baseForArpeggioInAMinor = fillIn6thString([{string: standardTuning[0], notes: [{fret: 0}, {fret: 5, cssClass: rootColor}, {fret: 8}]},
                     {string: standardTuning[1], notes: [{fret: 1}, {fret: 5}, {fret: 10, cssClass: rootColor}]},
                     {string: standardTuning[2], notes: [{fret: 2, cssClass: rootColor}, {fret: 5}, {fret: 9}]},
