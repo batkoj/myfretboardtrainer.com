@@ -2,11 +2,11 @@
 @import "./vendor/fretboard.css";
 
 :root {
-	--CColor: #660d5f;
-	--AColor: #276921;
-	--GColor: #2b14aa;
-	--EColor: #990000;
-	--DColor: #73a108;
+	--CColor: #95609f;
+	--AColor: #5fb96b;
+	--GColor: #2c89c6;
+	--EColor: #e35a3e;
+	--DColor: #ebda46;
 }
 
 html {
