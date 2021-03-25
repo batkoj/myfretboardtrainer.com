@@ -154,9 +154,13 @@
         display: flex;
         justify-content: center;
     }
+    .majorMinor button {
+        width: 50%;
+    }
     @media (min-width: 767px) {
         .majorMinor button {
-            width: 10%;
+            width: 9%;
+            height: 50px;
         }
     }
     .keys {
@@ -164,8 +168,8 @@
         justify-content: center;
     }
     .keys button {
-        height: 60px;
-        width: 80px;
+        height: 50px;
+        width: 70px;
         margin: 5px;
     }
 
@@ -174,7 +178,8 @@
         justify-content: center;
     }
     .scales button {
-        width: 15%;
+        width: 10%;
+        height: 50px;
         margin: 5px;
     }
 
