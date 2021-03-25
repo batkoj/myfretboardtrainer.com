@@ -1323,7 +1323,7 @@ THE SOFTWARE.
 
             var $element = $(this);
             // The value at which the octave is incremented needs to be first
-            var defaultNoteLetters = ["C", "C#/Db", "D", "D#/Eb", "E", "F", "F#/Gb", "G", "Ab/G#", "A", "A#/Bb", "B"];
+            var defaultNoteLetters = ["C", "C#/Db", "D", "D#/Eb", "E", "F", "F#/Gb", "G", "G#/Ab", "A", "A#/Bb", "B"];
             var defaultTuning = [
                 {
                     letter: "E",

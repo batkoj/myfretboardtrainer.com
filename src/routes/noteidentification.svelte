@@ -9,9 +9,10 @@
     let showSuccess = false;
     let successCounter = 0;
     let failureCounter = 0;
+    let includeFlats = false;
     
     let standardTuning = [{letter: "E", octave: 4}, {letter: "B", octave: 3}, {letter: "G", octave: 3}, {letter: "D", octave: 3}, {letter: "A", octave: 2}, {letter: "E", octave: 2}];
-    let allNoteLetters = ["C", "C#/Db", "D", "D#/Eb", "E", "F", "F#/Gb", "G", "Ab/G#", "A", "A#/Bb", "B"];
+    let allNoteLetters = ["C", "C#/Db", "D", "D#/Eb", "E", "F", "F#/Gb", "G", "G#/Ab", "A", "A#/Bb", "B"];
     let wholeNoteLetters = ["C", "D", "E", "F", "G", "A", "B"];
 
     onMount(async () => {
@@ -68,20 +69,24 @@
         let api = $fretboard.data("api");
         api.clearClickedNotes();
         
-        let randomNote = pickNoteUntilWhole(api);
+        let randomNote = includeFlats ? pickNote(api)[0] : pickNoteUntilWhole(api);
 
         api.setClickedNotes(randomNote);
     }
 
-    function pickNoteUntilWhole(api) {
+    function pickNote(api) {
         let randomString = standardTuning[Math.floor(Math.random() * standardTuning.length)];
         let randomFret = Math.floor(Math.random() * 13);
+        randomNoteLetter = api.getNoteByFretNumber(randomString, randomFret).letter;
         let randomNote = [{
             string: randomString, 
             notes: [{fret: randomFret}]
         }];
+        return [randomNote, randomNoteLetter];
+    }
 
-        randomNoteLetter = api.getNoteByFretNumber(randomString, randomFret).letter;
+    function pickNoteUntilWhole(api) {
+        let [randomNote, randomNoteLetter] = pickNote(api);
         if (!wholeNoteLetters.some( x => x === randomNoteLetter)) {
              return pickNoteUntilWhole(api)
         }
@@ -89,21 +94,27 @@
     }
     
     function handleClick(note) {
+        let button = document.querySelector("#button" + note.note.replaceAll("#","").replaceAll("/",""));
         if (note.note === randomNoteLetter) {
             showSuccess = true;
             successCounter++;
-            document.querySelector("#button" + note.note).style.backgroundColor = "#79c779";
+            button.style.backgroundColor = "#79c779";
             pickRandomNote();
             setTimeout(function () {
-                document.querySelectorAll("button").forEach(x => x.style.backgroundColor = "#efefef");
+                document.querySelectorAll("button").forEach(x => {
+                    if (includeFlats && x.id.length < 8) { // whole note
+                        x.style.backgroundColor = "#C7C7C7"
+                    } else {
+                        x.style.backgroundColor = "#efefef"
+                    }
+            });
                 showSuccess = false;
             }, 500);
         } else {
-            document.querySelector("#button" + note.note).style.backgroundColor = "red";
+            button.style.backgroundColor = "red";
             failureCounter++;
         }
     }
-
 
     $: successPercentage = (successCounter + failureCounter != 0) ? Math.floor(successCounter * 100 / (successCounter + failureCounter)) : 0;
 </script>
@@ -123,10 +134,24 @@
     </div>
     <span>{successCounter} / {failureCounter} ({successPercentage}%)</span>
     
-    <div class="buttons">
-        {#each wholeNoteLetters as note}
-            <button id="button{note}" on:click={() => handleClick({note})}>{note}</button>
-        {/each}
+
+    {#if includeFlats === true}
+        <div class="allButtons">
+            {#each allNoteLetters as note}
+                <button id="button{note.replaceAll("#","").replaceAll("/","")}" class:wholeNote={!note.includes("/")} on:click={() => handleClick({note})}>{note}</button>
+            {/each}
+        </div>
+    {:else}
+        <div class="wholeButtons">
+            {#each wholeNoteLetters as note}
+                <button id="button{note}" on:click={() => handleClick({note})}>{note}</button>
+            {/each}
+        </div>
+    {/if}
+    
+
+    <div>
+        Include flats/sharps: <input class="includeFlats" type=checkbox bind:checked={includeFlats}>
     </div>
 </main>
 
@@ -137,15 +162,34 @@
         text-align: center;
     }
 
-    .buttons {
+    .wholeButtons {
         display: flex;
         justify-content: center;
         margin-top: 20px;
     }
 
     @media screen and (min-width: 1400px) {
-        .buttons {
-            padding: 0px 400px;
+        .wholeButtons {
+            padding: 0px 500px;
         }
+    }
+
+    .allButtons {
+        display: flex;
+        justify-content: center;
+        margin: 20px 0px 0px 0px;
+    }
+    .allButtons button {
+        margin: 10px 0.2%;
+        max-width: 90px;
+    }
+
+    .includeFlats {
+        margin-top: 50px;
+        margin-left: 10px;
+    }
+
+    .wholeNote {
+        background-color: #C7C7C7;
     }
 </style>
