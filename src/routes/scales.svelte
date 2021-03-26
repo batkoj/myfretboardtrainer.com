@@ -124,6 +124,7 @@
     {#if options != undefined}
         <Fretboard options={options} on:fretboardInitialized={afterFretboardInit}/>
     {/if}
+    Show intervals <input class="intevalCheck" type=checkbox bind:checked={intervalsCheckbox}>
     {#if scale === 'caged'}
         <div class="cagedLetters">
             <span style="color:var(--CColor)">C</span>
@@ -132,8 +133,25 @@
             <span style="color:var(--EColor)">E</span>
             <span style="color:var(--DColor)">D</span>
         </div>
+    {:else}
+        {#if intervalsCheckbox}
+            <div class="scaleTable">
+                <table>
+                    <tr style="font-size: 12px;">
+                        {#each scaleDictionary.get(major).get(scale + "_intervals") as interval}
+                            <td>{interval}</td>
+                        {/each}
+                    </tr>
+                    <tr>
+                        {#each scaleDictionary.get(major).get(key).get((scale==="blues"?"blues_":"") + "notes") as note}
+                            <td>{note}</td>
+                        {/each}
+                    </tr>
+                </table>
+            </div>
+        {/if}    
     {/if}
-    Show intervals <input class="intevalCheck" type=checkbox bind:checked={intervalsCheckbox}>
+    
 </main>
 
 
@@ -162,6 +180,9 @@
             width: 9%;
             height: 50px;
         }
+        .scales button {
+            width: 10%;
+        }
     }
     .keys {
         display: flex;
@@ -178,7 +199,6 @@
         justify-content: center;
     }
     .scales button {
-        width: 10%;
         height: 50px;
         margin: 5px;
     }
@@ -187,5 +207,22 @@
         font-weight: 900;
         font-size: 20px;
         margin-top: 20px;
+    }
+
+    .scaleTable {
+        display: flex;
+        justify-content: center;
+        font-size: 15px;
+        font-weight: 600;
+        margin-top: 25px;
+    }
+
+    table, td {
+        border: 1px solid black;
+        border-collapse: collapse;
+    }
+    td {
+        padding: 3px;
+        width: 25px;
     }
 </style>

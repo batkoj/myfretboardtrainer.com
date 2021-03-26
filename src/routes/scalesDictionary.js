@@ -152,3 +152,46 @@ function moveBaseForward(base, numberOfFrets) {
     });
     return newBase;
 }
+
+
+// notes and intervals for the interval table at the bottom
+majorDictionary.get("C").set("notes", ["C", "D", "E", "F", "G", "A", "B"]);
+majorDictionary.get("C").set("blues_notes", ["C", "D", "Eb", "E", "F", "G", "A", "B"]);
+majorDictionary.get("D").set("notes", ["D", "E", "F#", "G", "A", "B", "C#"]);
+majorDictionary.get("D").set("blues_notes", ["D", "E", "F", "F#", "G", "A", "B", "C#"]);
+majorDictionary.get("E").set("notes", ["E", "F#", "G#", "A", "B", "C#", "D#"]);
+majorDictionary.get("E").set("blues_notes", ["E", "F#", "G", "G#", "A", "B", "C#", "D#"]);
+majorDictionary.get("F").set("notes", ["F", "G", "A", "Bb", "C", "D", "E"]);
+majorDictionary.get("F").set("blues_notes", ["F", "G", "Ab", "A", "Bb", "C", "D", "E"]);
+majorDictionary.get("G").set("notes", ["G", "A", "B", "C", "D", "E", "F#"]);
+majorDictionary.get("G").set("blues_notes", ["G", "A", "Bb", "B", "C", "D", "E", "F#"]);
+majorDictionary.get("A").set("notes", ["A", "B", "C#", "D", "E", "F#", "G#"]);
+majorDictionary.get("A").set("blues_notes", ["A", "B", "C", "C#", "D", "E", "F#", "G#"]);
+majorDictionary.get("B").set("notes", ["B", "C#", "D#", "E", "F#", "G#", "A#"]);
+majorDictionary.get("B").set("blues_notes", ["B", "C#", "D", "D#", "E", "F#", "G#", "A#"]);
+
+majorDictionary.set("arpeggio_intervals", ["1", "", "3", "", "5", "", ""]);
+majorDictionary.set("pentatonic_intervals", ["1", "2", "3", "", "5", "6", ""]);
+majorDictionary.set("blues_intervals", ["1", "2", "b3", "3", "", "5", "6", ""]);
+majorDictionary.set("scale_intervals", ["1", "2", "3", "4", "5", "6", "7"]);
+
+
+minorDictionary.get("C").set("notes", ["C", "D", "Eb", "F", "G", "Ab", "Bb"]);
+minorDictionary.get("C").set("blues_notes", ["C", "D", "Eb", "F", "Gb", "G", "Ab", "Bb"]);
+minorDictionary.get("D").set("notes", ["D", "E", "F", "G", "A", "Bb", "C"]);
+minorDictionary.get("D").set("blues_notes", ["D", "E", "F", "G", "Ab", "A", "Bb", "C"]);
+minorDictionary.get("E").set("notes", ["E", "F#", "G", "A", "B", "C", "D"]);
+minorDictionary.get("E").set("blues_notes", ["E", "F#", "G", "A", "Bb", "B", "C", "D"]);
+minorDictionary.get("F").set("notes", ["F", "G", "Ab", "Bb", "C", "Db", "Eb"]);
+minorDictionary.get("F").set("blues_notes", ["F", "G", "Ab", "Bb", "Cb", "C", "Db", "Eb"]);
+minorDictionary.get("G").set("notes", ["G", "A", "Bb", "C", "D", "Eb", "F"]);
+minorDictionary.get("G").set("blues_notes", ["G", "A", "Bb", "C", "Db", "D", "Eb", "F"]);
+minorDictionary.get("A").set("notes", ["A", "B", "C", "D", "E", "F", "G"]);
+minorDictionary.get("A").set("blues_notes", ["A", "B", "C", "D", "Eb", "E", "F", "G"]);
+minorDictionary.get("B").set("notes", ["B", "C#", "D", "E", "F#", "G", "A"]);
+minorDictionary.get("B").set("blues_notes", ["B", "C#", "D", "E", "F", "F#", "G", "A"]);
+
+minorDictionary.set("arpeggio_intervals", ["1", "", "b3", "", "5", "", ""]);
+minorDictionary.set("pentatonic_intervals", ["1", "", "b3", "4", "5", "", "b7"]);
+minorDictionary.set("blues_intervals", ["1", "", "b3", "4", "b5", "5", "", "b7"]);
+minorDictionary.set("scale_intervals", ["1", "2", "b3", "4", "5", "b6", "b7"]);
