@@ -2,10 +2,9 @@
     import { onMount } from 'svelte';
     import Fretboard from '../components/Fretboard.svelte';
     import { standardTuning, scaleDictionary } from './scalesDictionary.js';
-
+    import { allNoteLetters, noteCircles, intervals } from './util.js';
 
     let options;
-    let allNoteLetters = ["C", "C#/Db", "D", "D#/Eb", "E", "F", "F#/Gb", "G", "G#/Ab", "A", "A#/Bb", "B"];
 
     let major = true;
     let key = "C";
@@ -31,8 +30,6 @@
                 height: height
             };
         };
-        let noteCircles = [3, 5, 7, 9, 12, 15, 17, 19, 21, 24];
-        let intervals = ["1", "b2", "2", "b3", "3", "4", "b5", "5", "b6", "6", "b7", "7"];
         let animationSpeed = 400; // ms
 
         let clickedNotesChangedFunc = function () {

@@ -2,23 +2,21 @@
     import { onMount } from 'svelte';
     import { fade } from 'svelte/transition';
     import Fretboard from '../components/Fretboard.svelte';
+    import { standardTuning }  from './scalesDictionary.js';
+    import { allNoteLetters, wholeNoteLetters, noteCircles, intervals } from './util.js';
 
 
     let options;
-    let randomString;
     // using object because {note:"A"} != {note:"A"} - for transitions
     let randomNote = {note:""};
     let showSuccess = false;
 
-    let allNoteLetters = ["C", "C#/Db", "D", "D#/Eb", "E", "F", "F#/Gb", "G", "G#/Ab", "A", "A#/Bb", "B"];
-    let noteLettersToPickFrom = ["C", "D", "E", "F", "G", "A", "B"];
+    let noteLettersToPickFrom = wholeNoteLetters;
 
     onMount(async () => {
         let isChordMode = true;
         let isDisabled = false;
         
-        let standardTuning = [{letter: "E", octave: 4}, {letter: "B", octave: 3}, {letter: "G", octave: 3}, {letter: "D", octave: 3}, {letter: "A", octave: 2}, {letter: "E", octave: 2}];
-
         let numFrets = 12;
         let dimensionsFunc = function ($fretboardContainer, $fretboardBody, settings) {
             let width = jQuery(window).width();
@@ -34,8 +32,6 @@
                 height: height
             };
         };
-        let noteCircles = [3, 5, 7, 9, 12, 15, 17, 19, 21, 24];
-        let intervals = ["1", "b2", "2", "b3", "3", "4", "b5", "5", "b6", "6", "b7", "7"];
         let root = "C";
         let animationSpeed = 400; // ms
         let noteMode = "letter"; // or "interval"

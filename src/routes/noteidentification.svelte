@@ -1,8 +1,9 @@
 <!-- <script lang="typescript"> -->
 <script>
     import { onMount } from 'svelte';
-    import { fly, fade } from 'svelte/transition';
     import Fretboard from '../components/Fretboard.svelte';
+    import { getStringByNumber, allNoteLetters, wholeNoteLetters, noteCircles, intervals } from './util.js';
+    import { standardTuning }  from './scalesDictionary.js';
 
     let options;
     let randomNoteLetter;
@@ -11,9 +12,8 @@
     let failureCounter = 0;
     let includeFlats = false;
     
-    let standardTuning = [{letter: "E", octave: 4}, {letter: "B", octave: 3}, {letter: "G", octave: 3}, {letter: "D", octave: 3}, {letter: "A", octave: 2}, {letter: "E", octave: 2}];
-    let allNoteLetters = ["C", "C#/Db", "D", "D#/Eb", "E", "F", "F#/Gb", "G", "G#/Ab", "A", "A#/Bb", "B"];
-    let wholeNoteLetters = ["C", "D", "E", "F", "G", "A", "B"];
+    let stringsIncluded = standardTuning;
+
 
     onMount(async () => {
         let isChordMode = true;
@@ -34,8 +34,6 @@
                 height: height
             };
         };
-        let noteCircles = [3, 5, 7, 9, 12, 15, 17, 19, 21, 24];
-        let intervals = ["1", "b2", "2", "b3", "3", "4", "b5", "5", "b6", "6", "b7", "7"];
         let root = "C";
         let animationSpeed = 400; // ms
         let noteMode = "letter"; // or "interval"
@@ -75,7 +73,8 @@
     }
 
     function pickNote(api) {
-        let randomString = standardTuning[Math.floor(Math.random() * standardTuning.length)];
+        // let randomString = standardTuning[Math.floor(Math.random() * standardTuning.length)];
+        let randomString = stringsIncluded[Math.floor(Math.random() * stringsIncluded.length)];
         let randomFret = Math.floor(Math.random() * 13);
         randomNoteLetter = api.getNoteByFretNumber(randomString, randomFret).letter;
         let randomNote = [{
@@ -93,7 +92,7 @@
         return randomNote;
     }
     
-    function handleClick(note) {
+    function handleButtonClick(note) {
         let button = document.querySelector("#button" + note.note.replaceAll("#","").replaceAll("/",""));
         if (note.note === randomNoteLetter) {
             showSuccess = true;
@@ -101,7 +100,7 @@
             button.style.backgroundColor = "#79c779";
             pickRandomNote();
             setTimeout(function () {
-                document.querySelectorAll("button").forEach(x => {
+                document.querySelectorAll("button[id^='button']").forEach(x => {
                     if (includeFlats && x.id.length < 8) { // whole note
                         x.style.backgroundColor = "#C7C7C7"
                     } else {
@@ -113,6 +112,19 @@
         } else {
             button.style.backgroundColor = "red";
             failureCounter++;
+        }
+    }
+
+    function handleIncludedStringClick(stringNr) {
+        stringNr = stringNr.stringNr;
+        let correspondingString = getStringByNumber(stringNr);
+        if (stringsIncluded.includes(correspondingString)) {
+            if (stringsIncluded.length === 1) return;
+            stringsIncluded = stringsIncluded.filter(x => x != correspondingString);
+            document.querySelector("#stringButton" + stringNr).classList.remove("pressed");
+        } else {
+            stringsIncluded.push(correspondingString);
+            document.querySelector("#stringButton" + stringNr).classList.add("pressed");
         }
     }
 
@@ -138,13 +150,13 @@
     {#if includeFlats === true}
         <div class="allButtons">
             {#each allNoteLetters as note}
-                <button id="button{note.replaceAll("#","").replaceAll("/","")}" class:wholeNote={!note.includes("/")} on:click={() => handleClick({note})}>{note}</button>
+                <button id="button{note.replaceAll("#","").replaceAll("/","")}" class:wholeNote={!note.includes("/")} on:click={() => handleButtonClick({note})}>{note}</button>
             {/each}
         </div>
     {:else}
         <div class="wholeButtons">
             {#each wholeNoteLetters as note}
-                <button id="button{note}" on:click={() => handleClick({note})}>{note}</button>
+                <button id="button{note}" on:click={() => handleButtonClick({note})}>{note}</button>
             {/each}
         </div>
     {/if}
@@ -152,6 +164,14 @@
 
     <div>
         Include flats/sharps: <input class="includeFlats" type=checkbox bind:checked={includeFlats}>
+    </div>
+    <div class="stringSelection">
+        <span class="includeStringsText">Include strings:</span>
+        <div class="stringButtons">
+            {#each [1, 2, 3, 4, 5, 6] as stringNr}
+                <button class="pressed" id="stringButton{stringNr}" on:click={() => handleIncludedStringClick({stringNr})}>{stringNr}</button>
+            {/each}
+        </div>
     </div>
 </main>
 
@@ -191,5 +211,31 @@
 
     .wholeNote {
         background-color: #C7C7C7;
+    }
+
+    .stringSelection {
+        display: flex;
+        justify-content: center;
+        text-align: center;
+    }
+
+    .includeStringsText {
+        width: 125px;
+    }
+
+    .stringButtons {
+        margin-left: 10px;
+        margin-top: 2px;
+    }
+
+    .stringButtons button {
+        width: 22px;
+        height: 25px;
+        margin: 1px;
+        padding: 0px;
+    }
+
+    .pressed {
+        background-color: #969696;
     }
 </style>

@@ -2,6 +2,8 @@
     import { onMount } from 'svelte';
     import { fly, fade } from 'svelte/transition';
     import Fretboard from '../components/Fretboard.svelte';
+    import { getStringNumber, allNoteLetters, wholeNoteLetters, noteCircles, intervals } from './util.js';
+    import { standardTuning }  from './scalesDictionary.js';
 
 
     let options;
@@ -14,17 +16,13 @@
     let includeFlats = false;
     let numberOfFrets = "12";
 
-    let allStringNumbers, stringsIncluded
+    let allStringNumbers, stringsIncluded;
     allStringNumbers = stringsIncluded = [1, 2, 3, 4, 5, 6];
-    let allNoteLetters = ["C", "C#/Db", "D", "D#/Eb", "E", "F", "F#/Gb", "G", "G#/Ab", "A", "A#/Bb", "B"];
-    let notesLettersWithoutFlats = ["C", "D", "E", "F", "G", "A", "B"];
 
     onMount(async () => {
         let isChordMode = true;
         let isDisabled = false;
         
-        let standardTuning = [{letter: "E", octave: 4}, {letter: "B", octave: 3}, {letter: "G", octave: 3}, {letter: "D", octave: 3}, {letter: "A", octave: 2}, {letter: "E", octave: 2}];
-
         let dimensionsFunc = function ($fretboardContainer, $fretboardBody, settings) {
             let width = jQuery(window).width();
             let height;
@@ -39,8 +37,6 @@
                 height: height
             };
         };
-        let noteCircles = [3, 5, 7, 9, 12, 15, 17, 19, 21, 24];
-        let intervals = ["1", "b2", "2", "b3", "3", "4", "b5", "5", "b6", "6", "b7", "7"];
         let root = "C";
         let animationSpeed = 400; // ms
         let noteMode = "letter"; // or "interval"
@@ -110,39 +106,20 @@
 
         // randomString = Math.floor(Math.random() * 6) + 1;
         randomString = stringsIncluded[Math.floor(Math.random() * stringsIncluded.length)];
-
-        // jQuery("#string" + randomString).css("background-color", "#00d5ff");
         let string = document.querySelector("#string" + randomString);
         string.style.backgroundColor = "#00d5ff";
         string.style.height = "3px";
     }
 
     let pickRandomNote = (includeFlats) => {
-        let notesToPickFrom = includeFlats ? allNoteLetters : notesLettersWithoutFlats;
+        let notesToPickFrom = includeFlats ? allNoteLetters : wholeNoteLetters;
         randomNote.note = notesToPickFrom[Math.floor(Math.random() * notesToPickFrom.length)];
-    }
-   
-    let getStringNumber = (string) => {
-        if (string.letter === 'E') {
-            if (string.octave === 2) {
-                return 6;
-            } else {
-                return 1;
-            }
-        } else if (string.letter === 'B') {
-            return 2;
-        } else if (string.letter === 'G') {
-            return 3;
-        } else if (string.letter === 'D') {
-            return 4;
-        } else if (string.letter === 'A') {
-            return 5;
-        }
     }
 
     function handleIncludedStringClick(stringNr) {
         stringNr = stringNr.stringNr;
         if (stringsIncluded.includes(stringNr)) {
+            if (stringsIncluded.length === 1) return;
             stringsIncluded = stringsIncluded.filter(x => x != stringNr);
             document.querySelector("#button" + stringNr).classList.remove("pressed");
         } else {
